@@ -1,3 +1,4 @@
+from asyncio import Task
 from email import message
 from django.shortcuts import redirect, render
 from .models import Idea
@@ -18,14 +19,18 @@ class IdeaListView(LoginRequiredMixin, ListView):
   context_object_name = 'ideas'
   template_name = 'idea/idea_list.html'
   redirect_authenticated_user = True
-
+  
   def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
       context['ideas'] = Idea.objects.all()
       context['count'] = context['ideas'].filter(author=self.request.user).count()
+     
+      search_input = self.request.GET.get('search_area') or ''
+      if search_input:
+        context['ideas'] = context['ideas'].filter(title__contains=search_input)
+      context['search_input'] = search_input
       return context
-    
-
+ 
 class IdeaDetailView(DetailView):
   model = Idea
   fields = ['title', 'realted', 'content', 'author']

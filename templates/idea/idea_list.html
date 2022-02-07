@@ -32,6 +32,12 @@
   </div>
   
 <h3> <a href="{% url 'idea-new' %}"> Add Idea </a> </h3>
+  <div id="search-add-wrapper">
+    <form method="GET" style="margin-top: 20px; display: flex;">
+    <input type="text" value="{{search_input}}" name="search_area">
+    <input class="btn btn-primary" type="submit" value="Search">
+    </form>  
+  </div>
   {% for idea in ideas %}
 <!-- <img class="rounded-circle" src="{{ post.author.profile.image.url }}" alt=""> -->
    <h3><a href="{% url 'idea-detail' idea.id %}"> {{idea.title}} </a> </h3>
