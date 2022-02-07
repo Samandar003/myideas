@@ -1,0 +1,12 @@
+{% extends "idea/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <form action="" method="POST">
+      {% csrf_token %}
+      {{ form|crispy }}
+       <br>
+      <input class="btn btn-outline-info" type="submit" value="Register"> <br> <br>
+      <h4> Already have an account ? <a href="{% url 'login' %}"> Login </a> </h4>
+  </form>
+{% endblock content %}

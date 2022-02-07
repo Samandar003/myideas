@@ -1,0 +1,46 @@
+{% extends "idea/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %} <br>
+
+<style>
+
+</style>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}"> 
+        {{message}}  
+      </div>
+    {% endfor %}
+  {% endif %}
+
+    
+  {% if request.user.is_authenticated %}
+  <div class="header-bar">
+    <div>
+      <h1> Hello {{request.user|title}} </h1>
+      <h3 style="margin: 0;"> You have <i> {{count}} </i> idea{{count|pluralize:"s"}} </h3>
+    </div>
+  
+    <a href="{% url 'logout' %}"> Logout </a> <br>
+    <a href="{% url 'profile' %}"> My profile </a>
+  {% else %}
+    <a href="{% url 'login' %}"> LogIn </a>
+  {% endif %}
+  </div>
+  
+<h3> <a href="{% url 'idea-new' %}"> Add Idea </a> </h3>
+  {% for idea in ideas %}
+<!-- <img class="rounded-circle" src="{{ post.author.profile.image.url }}" alt=""> -->
+   <h3><a href="{% url 'idea-detail' idea.id %}"> {{idea.title}} </a> </h3>
+   <p> By <a href=""> {{idea.author}} </a> on {{idea.date_posted | date:"F d, Y" }} </p>
+   
+   
+   <p> {{idea.content|slice:":100"|safe}}... </p>
+{% endfor %}
+
+{% endblock content %}
+
+ 

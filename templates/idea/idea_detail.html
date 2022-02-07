@@ -1,0 +1,15 @@
+{% extends "idea/idea_list.html" %}
+
+{% block content %}
+  <ul>
+    <li> {{idea.title}} </li>
+    <li> {{idea.related}} </li>
+    <li> {{idea.content}} </li>
+    <li> {{idea.author}} </li>
+  </ul>
+  {% if request.user == idea.author %}
+    <p> <a href="{% url 'idea-update' idea.id %}"> Update </a> </p>
+    <p> <a href="{% url 'idea-delete' idea.id %}"> Delete </a> </p>
+  {% endif %}
+{% endblock content %}
+
