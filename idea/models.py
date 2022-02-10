@@ -16,7 +16,7 @@ class Idea(models.Model):
     ('IT', 'IT'),
     ('Law', 'Law'),
     ('Personal', 'Personal'),
-    ('Metal', 'Mental'),
+    ('Mental', 'Mental'),
     ('Environmental', 'Environmental'),
     ('Economical', 'Economical'),
     ('Health', 'Health'),

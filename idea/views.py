@@ -13,12 +13,12 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
 class IdeaListView(LoginRequiredMixin, ListView):
   model = Idea
   context_object_name = 'ideas'
   template_name = 'idea/idea_list.html'
-  redirect_authenticated_user = True
+  paginate_by = 2
+  redirect_authenticated_user = True 
   
   def get_context_data(self, **kwargs):
       context = super().get_context_data(**kwargs)
